@@ -1,0 +1,33 @@
+{
+  "name": "component",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "xpress": "*",
+    "body-parser": "*",
+    "compression": "*",
+    "connect-timeout": "*",
+    "cookie-parser": "*",
+    "ejs": "*",
+    "elasticsearch": "11.0.1",
+    "lodash": "*",
+    "mosca": "*",
+    "mqtt": "1.8.0",
+    "oneapm": "1.2.20",
+    "request": "*",
+    "socket.io": "*",
+    "winston": "2.1.1",
+    "winston-mail": "*",
+    "winston-mongodb": "*"
+  },
+  "devDependencies":{
+    "debug":"*"
+  },
+  "author": "",
+  "license": "ISC"
+}

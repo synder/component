@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Socket.io</title>
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script src="/js/socket/socket.io.js"></script>
+</head>
+<script>
+    var socket = io('ws://127.0.0.1:8000');
+    socket.on('response', function (data) {
+        $('#message').text(data.date);
+    });
+</script>
+</body>
+<body>
+    <div id="message">
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MQTT</title>
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script src="/js/mqtt/mqtt.js"></script>
+</head>
+<script>
+
+    var client = null;
+
+    var init = function(){
+
+        client = mqtt.connect('ws://127.0.0.1:8000');
+
+        client.subscribe('presence');
+
+        client.on('message', function(channel, msg){
+            $('#message').text(msg);
+        });
+
+        client.on('close', function(){
+            client;
+        });
+
+        return client;
+    };
+
+    init();
+
+</script>
+</body>
+<body>
+    <div id="message">
+
+    </div>
+</body>
+</html>

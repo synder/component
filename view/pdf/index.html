@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>PDF.js viewer</title>
+
+    <style>
+        #pre {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 150px;
+            height: 1000px;
+            cursor: pointer;
+        }
+
+        #pre:hover{
+            opacity: 0.5;
+            background-color: lightgrey;
+        }
+
+        #next {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 150px;
+            height: 1000px;
+            cursor: pointer;
+        }
+
+        #next:hover{
+            opacity: 0.5;
+            background-color: lightgrey;
+        }
+
+
+        #loading{
+            position: fixed;
+            top: 0;
+            height: 5px;
+            width: 0;
+            background-color: #00A000;
+        }
+    </style>
+
+    <script src="/js/jquery/jquery.min.js"></script>
+    <script src="/js/pdf/pdf.js"></script>
+    <script src="/js/pdf/viewer.js"></script>
+</head>
+
+<body style="text-align:center;padding: 0;margin: 0 auto;">
+<canvas id="container"></canvas>
+<div id="paging"></div>
+<div id="loading"></div>
+
+<div id="pre">
+    <i class="fa fa-angle-left"></i>
+</div>
+<div id="next">
+    <i class="fa fa-angle-right"></i>
+</div>
+<script>
+    $(function () {
+
+        var workerSrc = '/js/pdf/pdf.worker.js';
+
+        var viewer = new PDFViewer({
+            workerFileSrc : workerSrc,
+            canvasContainerID : 'container'
+        });
+
+        var $window = $(window);
+        var $document = $(document);
+        var $paging = $('#paging');
+        var $loading = $('#loading');
+        var $pre = $('#pre');
+        var $next = $('#next');
+
+        $pre.height($document.height());
+        $next.height($document.height());
+
+        viewer.load('/pdf/data', function(process){
+            $loading.css({
+                width : ((process.loaded / process.total) * 100) + '%'
+            });
+        }, function(){
+            $paging.text(viewer.currentPageNumber);
+            $loading.remove();
+        });
+
+//        $window.scroll(function () {
+//
+//            var $document = $(document);
+//
+//            var scrollTop = $document.scrollTop();
+//
+//            var documentHeight = $document.height();
+//
+//            var windowHeight = $window.height();
+//
+//            if (scrollTop <= 0) {
+//                viewer.pageUp();
+//                if(viewer.currentPageNumber != 1){
+//                    $document.scrollTop(15);
+//                }
+//            }
+//
+//            if (scrollTop >= documentHeight - windowHeight) {
+//                viewer.pageDown();
+//                if(viewer.currentPageNumber != viewer.totalPageCount){
+//                    $document.scrollTop(15);
+//                }
+//            }
+//
+//            $paging.text(viewer.currentPageNumber);
+//        });
+
+        $pre.click(function(){
+            viewer.pageUp();
+        });
+
+        $next.click(function(){
+            viewer.pageDown();
+        });
+
+    });
+</script>
+</body>
+</html>
