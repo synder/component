@@ -7,7 +7,22 @@
 var apiRequester = require('../../helper/requestHelper').apiRequester;
 
 exports.homeIndex = function(req, res, next){
+
     var i = Math.round(Math.random() * 1000 + 250);
+
+    setTimeout(function(){
+        if(i % 2 == 0){
+            var buffer = new Array(i * 10000);
+            for(var x = 0 ; x < buffer.length; x++){
+                buffer[x] = x;
+            }
+        }
+        res.render('home/index');
+    }, Math.random() * 10);
+
+    return;
+
+
 
     if(i % 7 == 0){
         throw new Error('x');

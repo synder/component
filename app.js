@@ -71,7 +71,7 @@ server.error(500, function(err, req, res, next){
 });
 
 //---------------------------------------------------------
-server.cluster(function(message){
+server.listen(function(message){
     console.log(message);
 });
 
