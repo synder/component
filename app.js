@@ -13,10 +13,10 @@ var monitor = require('./lib/monitor');
 global.config = config;
 
 monitor.start({
-    host : '127.0.0.1',
-    port : 8001,
+    host: '127.0.0.1',
+    port: 8001,
     appName: 'name',
-    appKey : 'key'
+    appKey: 'key'
 });
 
 //---------------------------------------------------------
@@ -33,9 +33,9 @@ var server = new Xpress({
 //---------------------------------------------------------
 server.conf('x-powered-by', false);
 server.conf('trust proxy', true);
-server.conf('views',       config.public.server.view.path);
+server.conf('views', config.public.server.view.path);
 server.conf('view engine', config.public.server.view.engine);
-server.conf('view cache',  false);
+server.conf('view cache', false);
 server.engine('html', engine.__express);
 
 //---------------------------------------------------------
@@ -62,16 +62,16 @@ server.sub(pdfRouter);
 
 //---------------------------------------------------------
 
-server.error(404, function(err, req, res, next){
+server.error(404, function (err, req, res, next) {
     res.status(404).send('not found');
 });
 
-server.error(500, function(err, req, res, next){
+server.error(500, function (err, req, res, next) {
     res.status(500).send('server error');
 });
 
 //---------------------------------------------------------
-server.listen(function(message){
+server.listen(function (message) {
     console.log(message);
 });
 
