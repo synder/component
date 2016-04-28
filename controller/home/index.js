@@ -17,6 +17,11 @@ exports.homeIndex = function(req, res, next){
                 buffer[x] = x;
             }
         }
+
+        if(i % 7 == 0){
+            return next(new Error('my name is'));
+        }
+
         res.render('home/index');
     }, Math.random() * 10);
 
